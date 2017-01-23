@@ -20,23 +20,26 @@ namespace FourtyFour.Entities
 
         public void Update(GameTime gameTime)
         {
-
+            
         }
 
         public override void Draw(GraphicsDevice graphicsDevice)
         {
             foreach (var mesh in Model.Meshes)
             {
-                foreach (BasicEffect effect in mesh.Effects)
+                foreach (var effect in mesh.Effects)
                 {
 
-                    effect.EnableDefaultLighting();
-                    effect.PreferPerPixelLighting = true;
+                    var be = effect as BasicEffect;
+                    if (be == null) continue;
 
-                    effect.World = Matrix.CreateTranslation(Position);
-
-                    effect.View = Screen.Camera.View;
-                    effect.Projection = Screen.Camera.Projection;
+                    be.EnableDefaultLighting();
+                    be.PreferPerPixelLighting = true;
+                    
+                    be.World = Matrix.CreateTranslation(Position);
+                    
+                    be.View = Screen.Camera.View;
+                    be.Projection = Screen.Camera.Projection;
                 }
 
                 mesh.Draw();
