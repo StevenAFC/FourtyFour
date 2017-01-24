@@ -9,7 +9,9 @@ namespace FourtyFour.Input
     public enum ActionType
     {
         PressedLeft,
-        PressedRight
+        PressedRight,
+        PressedUp,
+        PressedDown
     }
 
     public class InputEvent

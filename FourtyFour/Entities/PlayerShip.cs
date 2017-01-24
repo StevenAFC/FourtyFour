@@ -24,6 +24,9 @@ namespace FourtyFour.Entities
             {
                 if (inputEvent.ActionType == ActionType.PressedLeft) Position.X = Position.X - (0.01f * gameTime.ElapsedGameTime.Milliseconds);
                 if (inputEvent.ActionType == ActionType.PressedRight) Position.X = Position.X + (0.01f * gameTime.ElapsedGameTime.Milliseconds);
+                if (inputEvent.ActionType == ActionType.PressedUp) Position.Y = Position.Y + (0.01f * gameTime.ElapsedGameTime.Milliseconds);
+                if (inputEvent.ActionType == ActionType.PressedDown) Position.Y = Position.Y - (0.01f * gameTime.ElapsedGameTime.Milliseconds);
+
             }
         }
 
