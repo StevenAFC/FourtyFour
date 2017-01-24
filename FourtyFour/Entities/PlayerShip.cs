@@ -1,4 +1,4 @@
-﻿using FourtyFour.Common;
+﻿using FourtyFour.Input;
 using FourtyFour.Screens;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -18,12 +18,16 @@ namespace FourtyFour.Entities
             Position = position;
         }
 
-        public void Update(GameTime gameTime)
+        public override void Update(GameTime gameTime)
         {
-            
+            foreach (var inputEvent in Screen.InputManager.InputEvents)
+            {
+                if (inputEvent.ActionType == ActionType.PressedLeft) Position.X = Position.X - (0.01f * gameTime.ElapsedGameTime.Milliseconds);
+                if (inputEvent.ActionType == ActionType.PressedRight) Position.X = Position.X + (0.01f * gameTime.ElapsedGameTime.Milliseconds);
+            }
         }
 
-        public override void Draw(GraphicsDevice graphicsDevice)
+        public override void Draw(GameTime gameTime)
         {
             foreach (var mesh in Model.Meshes)
             {

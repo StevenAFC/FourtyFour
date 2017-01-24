@@ -15,6 +15,7 @@ namespace FourtyFour.Input
             var inputEvents = new List<InputEvent>();
 
             if (_currentKeyboardState.IsKeyDown(Keys.A)) inputEvents.Add(new InputEvent(1, ActionType.PressedLeft));
+            if (_currentKeyboardState.IsKeyDown(Keys.D)) inputEvents.Add(new InputEvent(1, ActionType.PressedRight));
 
             _previousKeyboardState = _currentKeyboardState;
 

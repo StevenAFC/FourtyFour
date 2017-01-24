@@ -16,6 +16,8 @@ namespace FourtyFour.Entities
             Screen = screen;
         }
 
-        public abstract void Draw(GraphicsDevice graphicsDevice);
+        public abstract void Draw(GameTime gameTime);
+
+        public abstract void Update(GameTime gameTime);
     }
 }

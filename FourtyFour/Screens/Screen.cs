@@ -1,7 +1,9 @@
 ﻿using System.Collections.Generic;
 using FourtyFour.Common;
 using FourtyFour.Entities;
+using FourtyFour.Input;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 
 namespace FourtyFour.Screens
 {
@@ -13,6 +15,8 @@ namespace FourtyFour.Screens
 
         public Camera Camera { get; set; }
 
+        public InputManager InputManager { get; set; }
+
         protected Screen(Game game)
         {
             Game = game;
@@ -22,13 +26,25 @@ namespace FourtyFour.Screens
             {
                 Position = new Vector3(0, 10, 15)
             };
+
+            InputManager = new InputManager();
+        }
+
+        public virtual void Update(GameTime gameTime)
+        {
+            InputManager.Update(gameTime);
+
+            foreach (var entity in Entities)
+            {
+                entity.Update(gameTime);
+            }
         }
 
         public virtual void Draw(GameTime gameTime)
         {
             foreach (var entity in Entities)
             {
-                entity.Draw(Game.GraphicsDevice);
+                entity.Draw(gameTime);
             }
         }
     }

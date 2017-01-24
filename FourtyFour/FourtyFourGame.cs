@@ -1,5 +1,4 @@
-﻿using FourtyFour.Input;
-using FourtyFour.Screens;
+﻿using FourtyFour.Screens;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
 
@@ -11,12 +10,9 @@ namespace FourtyFour
 
         private Screen _currentScreen;
 
-        public InputManager InputManager;
-
         public FourtyFourGame()
         {
             _graphics = new GraphicsDeviceManager(this);
-            InputManager = new InputManager();
 
             Content.RootDirectory = "Content";
         }
@@ -37,10 +33,10 @@ namespace FourtyFour
 
         protected override void Update(GameTime gameTime)
         {
-            //if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
-                //Exit();
+            if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
+                Exit();
 
-            InputManager.Update(gameTime);
+            _currentScreen.Update(gameTime);
 
             base.Update(gameTime);
         }
