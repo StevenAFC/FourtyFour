@@ -41,6 +41,7 @@
     <Compile Include="Entities\Entity.cs" />
     <Compile Include="Entities\IEntity.cs" />
     <Compile Include="Entities\PlayerShip.cs" />
+    <Compile Include="Entities\Projectile.cs" />
     <Compile Include="FourtyFourGame.cs" />
     <Compile Include="Common\Camera.cs" />
     <Compile Include="Input\IInputType.cs" />

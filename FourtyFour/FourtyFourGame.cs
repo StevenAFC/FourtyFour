@@ -20,6 +20,10 @@ namespace FourtyFour
         protected override void Initialize()
         {
             base.Initialize();
+
+            _graphics.PreferredBackBufferWidth = 1280;
+            _graphics.PreferredBackBufferHeight = 720;
+            _graphics.ApplyChanges();
         }
 
         protected override void LoadContent()

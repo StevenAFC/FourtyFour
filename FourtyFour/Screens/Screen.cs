@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using FourtyFour.Common;
 using FourtyFour.Entities;
 using FourtyFour.Input;
@@ -34,7 +35,8 @@ namespace FourtyFour.Screens
         {
             InputManager.Update(gameTime);
 
-            foreach (var entity in Entities)
+            //Collections in foreach loops are immutable, so need to create a new list, this feels like a hack.
+            foreach (var entity in Entities.ToList())
             {
                 entity.Update(gameTime);
             }

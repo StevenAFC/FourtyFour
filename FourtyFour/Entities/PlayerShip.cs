@@ -1,4 +1,5 @@
-﻿using FourtyFour.Input;
+﻿using System.Linq;
+using FourtyFour.Input;
 using FourtyFour.Screens;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -26,7 +27,7 @@ namespace FourtyFour.Entities
                 if (inputEvent.ActionType == ActionType.PressedRight) Position.X = Position.X + (0.01f * gameTime.ElapsedGameTime.Milliseconds);
                 if (inputEvent.ActionType == ActionType.PressedUp) Position.Y = Position.Y + (0.01f * gameTime.ElapsedGameTime.Milliseconds);
                 if (inputEvent.ActionType == ActionType.PressedDown) Position.Y = Position.Y - (0.01f * gameTime.ElapsedGameTime.Milliseconds);
-
+                if (inputEvent.ActionType == ActionType.Shoot) Screen.Entities.Add(new Projectile(Game, Screen, Game.Content.Load<Model>("PremCube"), Position));
             }
         }
 
