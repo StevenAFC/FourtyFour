@@ -43,7 +43,7 @@ namespace FourtyFour.Entities
 
         public override void Update(GameTime gameTime)
         {
-            Position.Y += (0.02f * gameTime.ElapsedGameTime.Milliseconds);
+            Position.Y += (0.04f * gameTime.ElapsedGameTime.Milliseconds);
         }
     }
 }

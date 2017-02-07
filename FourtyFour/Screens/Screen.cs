@@ -25,7 +25,7 @@ namespace FourtyFour.Screens
 
             Camera = new Camera(MathHelper.Pi / 4, (float)16 / 9, 10f, 700f)
             {
-                Position = new Vector3(0, 10, 15)
+                Position = new Vector3(0, -20, 35)
             };
 
             InputManager = new InputManager();

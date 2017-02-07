@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using FourtyFour.Input;
 using FourtyFour.Screens;
 using Microsoft.Xna.Framework;
@@ -12,6 +13,14 @@ namespace FourtyFour.Entities
 
         public Vector3 Position;
 
+        private float _drag = 0.85f;
+
+        private Vector3 _acceleration = new Vector3(0.2f, 0.05f, 0.2f);
+
+        private Vector3 _maxspeed = new Vector3(0.8f);
+
+        private Vector2 _speed;
+
         public PlayerShip(Game game, Screen screen, Model model, Vector3 position)
             : base(game, screen)
         {
@@ -21,14 +30,25 @@ namespace FourtyFour.Entities
 
         public override void Update(GameTime gameTime)
         {
-            foreach (var inputEvent in Screen.InputManager.InputEvents)
-            {
-                if (inputEvent.ActionType == ActionType.PressedLeft) Position.X = Position.X - (0.01f * gameTime.ElapsedGameTime.Milliseconds);
-                if (inputEvent.ActionType == ActionType.PressedRight) Position.X = Position.X + (0.01f * gameTime.ElapsedGameTime.Milliseconds);
-                if (inputEvent.ActionType == ActionType.PressedUp) Position.Y = Position.Y + (0.01f * gameTime.ElapsedGameTime.Milliseconds);
-                if (inputEvent.ActionType == ActionType.PressedDown) Position.Y = Position.Y - (0.01f * gameTime.ElapsedGameTime.Milliseconds);
-                if (inputEvent.ActionType == ActionType.Shoot) Screen.Entities.Add(new Projectile(Game, Screen, Game.Content.Load<Model>("PremCube"), Position));
-            }
+            //Movement
+            var inputEvents = Screen.InputManager.InputEvents;
+
+            _speed.X *= _drag;
+            _speed.Y *= _drag;
+
+            if (inputEvents.Any(x => x.ActionType == ActionType.PressedRight)) _speed.X += _acceleration.X;
+            if (inputEvents.Any(x => x.ActionType == ActionType.PressedLeft)) _speed.X -= _acceleration.X;
+
+            if (inputEvents.Any(x => x.ActionType == ActionType.PressedUp)) _speed.Y += _acceleration.Y;
+            if (inputEvents.Any(x => x.ActionType == ActionType.PressedDown)) _speed.Y -= _acceleration.Z;
+
+            _speed.X = MathHelper.Clamp(_speed.X, -_maxspeed.X, _maxspeed.X);
+            _speed.Y = MathHelper.Clamp(_speed.Y, -_maxspeed.Y, _maxspeed.Z);
+
+            Position.X += _speed.X;
+            Position.Y += _speed.Y;
+
+            if (inputEvents.Any(x => x.ActionType == ActionType.Shoot)) Screen.Entities.Add(new Projectile(Game, Screen, Game.Content.Load<Model>("PremCube"), Position));
         }
 
         public override void Draw(GameTime gameTime)
